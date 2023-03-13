@@ -22,7 +22,7 @@ AWarriorCharacter::AWarriorCharacter()
 	//-----------------------------------------
 	// AnimInstance ÁöÁ¤
 	//-----------------------------------------
-	static ConstructorHelpers::FClassFinder<UAnimInstance>	animClass(TEXT("AnimBlueprint'/Game/Blueprints/Player/ABP_Warrior.ABP_Warrior_C'"));
+	static ConstructorHelpers::FClassFinder<UAnimInstance>	animClass(TEXT("AnimBlueprint'/Game/Blueprints/Player/Animation/ABP_Warrior.ABP_Warrior_C'"));
 
 	if (animClass.Succeeded())
 		GetMesh()->SetAnimInstanceClass(animClass.Class);
@@ -31,4 +31,8 @@ AWarriorCharacter::AWarriorCharacter()
 void AWarriorCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void AWarriorCharacter::NormalAttackCheck()
+{
 }

@@ -32,12 +32,25 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
+
 public:
+	//----------
+	// 공격
+	//----------
+	virtual void NormalAttackCheck();
+
+
+public:
+	//----------
+	// 키입력
+	//----------
 	void MoveForward(float Scale);
 	void MoveHorizontal(float Scale);
 	void RotationCameraY(float Scale);
 	void RotationCameraZ(float Scale);
 	void CameraZoom(float Scale);
+
+	void NormalAttackKey();
 
 
 protected:

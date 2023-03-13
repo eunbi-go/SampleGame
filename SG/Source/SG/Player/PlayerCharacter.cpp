@@ -27,6 +27,7 @@ APlayerCharacter::APlayerCharacter()
 	mSpringArm->TargetArmLength = 500.f;
 	mSpringArm->SetRelativeLocation(FVector(0.0, 0.0, 160.0));
 	mSpringArm->SetRelativeRotation(FRotator(-15.0, 90.0, 0.0));
+	//mSpringArm->SetRelativeRotation(FRotator(-45.0, 90.0, 0.0));
 
 	GetCapsuleComponent()->SetGenerateOverlapEvents(true);
 	GetCapsuleComponent()->SetNotifyRigidBodyCollision(true);
@@ -64,6 +65,13 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis<APlayerCharacter>(TEXT("RotationCameraZ"), this, &APlayerCharacter::RotationCameraZ);
 	PlayerInputComponent->BindAxis<APlayerCharacter>(TEXT("RotationCameraY"), this, &APlayerCharacter::RotationCameraY);
 	PlayerInputComponent->BindAxis<APlayerCharacter>(TEXT("CameraZoom"), this, &APlayerCharacter::CameraZoom);
+
+	PlayerInputComponent->BindAction<APlayerCharacter>(TEXT("NormalAttack"), EInputEvent::IE_Pressed,
+		this, &APlayerCharacter::NormalAttackKey);
+}
+
+void APlayerCharacter::NormalAttackCheck()
+{
 }
 
 void APlayerCharacter::MoveForward(float Scale)
@@ -175,7 +183,7 @@ void APlayerCharacter::MoveHorizontal(float Scale)
 		}
 	}
 	
-	PrintViewport(1.f, FColor::Red, FString::Printf(TEXT("dir: %f"), moveDir));
+	//PrintViewport(1.f, FColor::Red, FString::Printf(TEXT("dir: %f"), moveDir));
 
 	if (Scale == 0.f)
 		return;
@@ -247,5 +255,11 @@ void APlayerCharacter::CameraZoom(float Scale)
 
 	if (mSpringArm->TargetArmLength > cameraZoomMax)
 		mSpringArm->TargetArmLength = cameraZoomMax;
+}
+
+void APlayerCharacter::NormalAttackKey()
+{
+	// 일반 공격 몽타주 재생 시작.
+	mAnimInst->NormalAttack();
 }
 
